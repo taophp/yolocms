@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  php:
+    build: .
+    image: yolocms
+    ports:
+      - "8181:80"
+    volumes:
+      - ./src:/home/www-data
