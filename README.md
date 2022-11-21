@@ -16,7 +16,7 @@ I also need a project to dig into [Symfony](https://symfony.com/). But I prefer 
 On Unixes, you can easyly start a test server using docker or podman by running the following command in the project directory :
 
 ```
-docker run -it --rm -v "$(pwd)"/src:/home/www-data -w /home/www-data -p 8181:80 php:8.1.12-zts-alpine3.16 php -S 0.0.0.0:80
+docker-compose up -d
 ```
 
 Then connect to http://localhost:8181.
