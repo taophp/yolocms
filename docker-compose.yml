@@ -1,10 +1,18 @@
 version: '3'
 
 services:
-  php:
-    build: .
-    image: yolocms
+  symfony:
+    build: docker/symfony
+    image: yolocms-symfony
     ports:
-      - "8181:80"
+      - "8181:8080"
     volumes:
-      - ./src:/home/www-data
+      - ./src/admin:/home/www-data
+      - ./src/public:/home/www-data/build
+  web:
+    build: docker/web
+    image: yolocms-web
+    ports:
+      - "8182:80"
+    volumes:
+      - ./src/public:/home/www-data
