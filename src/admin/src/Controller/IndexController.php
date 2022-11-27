@@ -27,11 +27,12 @@ class IndexController extends AbstractController
             }
         }
 
-        Yaml::parse($head);
+        $itemConfig = Yaml::parse($head);
 
         $converter = new CommonMarkConverter();
-        return new Response(
-            $converter->convert($body)
-        );
+        return $this->render('index.html.twig', [
+            'title' => $itemConfig['title'],
+            'body' => $converter->convert($body),
+        ]);
     }
 }
