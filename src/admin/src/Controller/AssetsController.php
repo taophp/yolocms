@@ -12,33 +12,46 @@ class AssetsController extends AbstractController
 {
     /**
      * List allowed asset file extensions with their mime types
+     * 
+     * @todo Replace by a configuration file
+     * @see http://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+     * @see https://symfony.com/doc/current/components/config.html
      */
-    protected static $allowedExt2mime = [
-        'css' => 'text/css',
+    protected static $ext2mime = [
+        'css'   =>  'text/css',
+        'js'    =>  'text/javascript',
+        'jpg'   =>  'image/jpeg',
+        'jpe'   =>  'image/jpeg',
+        'jpeg'  =>  'image/jpeg',
+        'gif'   =>  'image/gif',
+        'png'   =>  'image/png',
+        'webp'  =>  'image/webp',
+        'ico'  =>  'image/x-icon',    
     ];
 
-    #[Route('/assets/{dir}/{srcFileName}')]
+    #[Route('/assets/{dir}/{srcFileName}', name: 'assets')]
     public function index(string $srcFileName, string $dir=''): Response
     {
         $srcDir =  __DIR__.'/../../themes/default/assets/';
         $srcFullFileName = realpath($srcDir.$dir.'/'.$srcFileName);
-/**
- * @todo Check if the required file is stored in the allowed path
- */
+        /**
+         * @todo Check if the required file is stored in the allowed path
+         */
         return new Response(
             file_get_contents($srcFullFileName),
             Response::HTTP_OK,[
-                'content-type' => static::allowedExt2mime($srcFullFileName)
+                'content-type' => static::ext2mime($srcFullFileName)
             ]
         );
     }
 
-    protected static function allowedExt2mime(string $fileName) {
+    protected static function ext2mime(string $fileName) {
         $ext = substr($fileName, strrpos($fileName,'.',)+1);
-        if (array_key_exists($ext, static::$allowedExt2mime)) {
-            return (static::$allowedExt2mime[$ext]);
+        if (array_key_exists($ext, static::$ext2mime)) {
+            return (static::$ext2mime[$ext]);
         }
 
-        throw new Exception('Unallowed mime-type for asset file: '.$fileName);
+        throw new Exception('Unknown mime-type for asset file: '.$fileName);
     }
+    
 }
