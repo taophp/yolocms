@@ -33,7 +33,7 @@
         {% endblock %}
     </head>
     <body>
-        {% if adminbar%}{{ adminbar|raw }}{% endif %}
+        {% if adminbar is defined %}{{ adminbar|raw }}{% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>
