@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{{ title }}{% endblock %}</title>
         {% block favicons %}
         <link rel="icon" type="image/png" href="{{ asset('assets/img/icon.png') }}">
@@ -24,6 +25,12 @@
         <link rel="apple-touch-icon" type="image/png" sizes="310x310" href="{{ asset('assets/img/Square310x310Logo.png') }}">
         <link rel="icon" type="image/png" sizes="310x310" href="{{ asset('assets/img/Square310x310Logo.png') }}">
         {% endblock %}
+        {% block adminassets %}
+            {% if adminbar is defined %}
+                <link href="{{ asset('assets/admin/admin.css') }}" rel="stylesheet">
+                <script src="{{ asset('assets/admin/admin.js')}}"></script>
+            {% endif %}
+        {% endblock %}
         {% block stylesheets %}
             <link href="{{ asset('assets/css/simple.min.css') }}" rel="stylesheet">
         {% endblock %}
@@ -32,7 +39,7 @@
             <script src="{{ asset('assets/js/main.js') }}"></script>
         {% endblock %}
     </head>
-    <body>
+    <body {% if adminbar is defined %} class="yolobar-opened" {% endif %}>
         {% if adminbar is defined %}{{ adminbar|raw }}{% endif %}
         {% block body %}{% endblock %}
     </body>

@@ -32,7 +32,15 @@ class AssetsController extends AbstractController
     #[Route('/assets/{dir}/{srcFileName}', name: 'assets')]
     public function index(string $srcFileName, string $dir=''): Response
     {
-        $srcDir =  __DIR__.'/../../themes/default/assets/';
+        if ($dir==='admin') {
+            $srcDir =  __DIR__.'/../../templates/assets/';
+            $dir='';
+        }else{
+            $srcDir =  __DIR__.'/../../themes/default/assets/';
+        }
+        /**
+         * @todo Use the configured theme
+         */
         $srcFullFileName = realpath($srcDir.$dir.'/'.$srcFileName);
         /**
          * @todo Check if the required file is stored in the allowed path

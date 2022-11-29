@@ -1,0 +1,48 @@
+body.yolobar-opened {
+    margin-top: 1rem;
+}
+#yolobar {
+    display: block;
+    background-color: #222;
+    top: 0;
+    right: 0;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    color: #EEE;
+    font: 11px Arial, sans-serif;
+    margin: 0;
+    padding: .1rem 1rem;
+    position: fixed;
+    text-align: left;
+    text-transform: none;
+    z-index: 99999;
+    direction: ltr;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    border-bottom: 1px dotted gold;
+}
+#yoloclose {
+    cursor: pointer;
+    float: right;
+    display: none;
+}
+body.yolobar-opened #yoloclose {
+    display: inline;
+}
+#yolobar {
+    width: auto;
+}
+body.yolobar-opened #yolobar {
+    width: 100%;
+}
+#yolomenu {
+    display: none;
+}
+body.yolobar-opened #yolomenu {
+    display: block;
+}
+#yolopen {
+    display: block;
+}
+body.yolobar-opened #yolopen {
+    display: none;
+}
