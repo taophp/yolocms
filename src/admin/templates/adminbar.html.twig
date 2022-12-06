@@ -1,7 +1,11 @@
 <div id="yolobar" >
     <div id="yolotoggle">
-        <span id="yolopen"><a href="#">Y</a></span>
-        <span id="yoloclose">X</span>
+        <span id="yolopen"><a href="#" title="Open the Yolobar" alt="Open the Yolobar">🇾</a></span>
+        <span id="yoloclose"><a href="#" title="Close the Yolobar" alt="Close the Yolobar">❌</a></span>
     </div>
-    <div id="yolomenu"><a href="#">Edit</a></div>
+    <div id="yolomenu">
+        <a href="{{ path('index') }}">🏡</a>
+        <a href="#">✏️</a>
+        <a href="{{ path('_build') }}">🏗️</a>
+    </div>
 </div>
