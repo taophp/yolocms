@@ -76,7 +76,6 @@ class IndexController extends AbstractController
                 continue;
             }
             // copy
-            dump('Copy', $srcFile, $dstFile);
             copy($srcFile, $dstFile);
         }
 
