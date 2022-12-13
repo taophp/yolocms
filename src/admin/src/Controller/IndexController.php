@@ -21,7 +21,7 @@ class IndexController extends AbstractController
             throw new Exception("File not found or access refused: ".$page);
         }
 
-        [$head, $body] = $this->parse($srcFullFileName);
+        [$head, $body, $md] = $this->parse($srcFullFileName);
 
         /**
          * @todo make the default theme web configurable
@@ -29,12 +29,12 @@ class IndexController extends AbstractController
         return $this->render('index.html.twig', [
             'title' => $head->title,
             'body'  => $body,
-            'adminbar'   => $this->getAdminBar(),
+            'adminbar'   => $this->getAdminBar($md),
         ]);
     }
 
-    protected function getAdminBar() : String {
-        return $this->renderView('@admin/adminbar.html.twig');
+    protected function getAdminBar(string $md = null) : String {
+        return $this->renderView('@admin/adminbar.html.twig', ['md' => $md]);
     }
 
     #[Route('/_build', name: '_build', priority: 1)]
@@ -100,7 +100,7 @@ class IndexController extends AbstractController
         }
 
         $converter = new CommonMarkConverter();
-        return [Yaml::parse($head,Yaml::PARSE_OBJECT_FOR_MAP), $converter->convert($body)];
+        return [Yaml::parse($head,Yaml::PARSE_OBJECT_FOR_MAP), $converter->convert($body), $srcContents];
         
     }
 
